@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="RecipeApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:RecipeApp"
+    xmlns:screens ="clr-namespace:RecipeApp.Screens"
+    Shell.FlyoutBehavior="Flyout"
+    Title="RecipeApp">
+
+    <Shell.FlyoutHeader>
+        <StackLayout>
+            <Label Text="{Binding UserName}" FontSize="Large" HorizontalOptions="Center" />
+            <Button Text="Добавить рецепт" Clicked="OnAddRecipeButtonClicked" />
+            <Button Text="Мои рецепты" />
+        </StackLayout>
+    </Shell.FlyoutHeader>
+
+    <TabBar>
+        <Tab Title="Продукты">
+            <ShellContent ContentTemplate="{DataTemplate screens:ProductsScreen}"></ShellContent>
+        </Tab>
+
+        <Tab Title="Рецепты">
+            <ShellContent ContentTemplate="{DataTemplate screens:RecipesScreen}"></ShellContent>
+        </Tab>
+
+        <Tab Title="События">
+            <ShellContent ContentTemplate="{DataTemplate screens:EventScreen}"></ShellContent>
+        </Tab>
+
+        <Tab Title="Избранное">
+            <ShellContent ContentTemplate="{DataTemplate screens:FavouritesScreen}"></ShellContent>
+        </Tab>
+
+        <Tab Title="Покупки">
+            <ShellContent ContentTemplate="{DataTemplate screens:PurchasesScreen}"></ShellContent>
+        </Tab>
+
+
+        <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+
+        <ShellContent Route="RecipeDetails" ContentTemplate="{DataTemplate screens:RecipeDetails}" />
+
+    </TabBar>
+
+
+    
+    
+</Shell>

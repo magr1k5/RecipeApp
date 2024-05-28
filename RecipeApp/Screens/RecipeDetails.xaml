@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RecipeApp.Screens.RecipeDetails"
+             xmlns:viewModel="clr-namespace:RecipeApp.ViewModel"
+             Title="Recipe Details">
+
+    <ContentPage.BindingContext>
+        <viewModel:RecipeDetailsViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <StackLayout Padding="10">
+
+            <!-- Image -->
+            <Image Source="{Binding Recipe.img}" 
+                   HeightRequest="200" 
+                   Aspect="AspectFill" />
+
+            <!-- Recipe Name -->
+            <Label Text="{Binding Recipe.recipename}"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" 
+                   Margin="0,10,0,0" />
+
+            <!-- Recipe Description -->
+            <Label Text="{Binding Recipe.recipedescription}" 
+                   FontSize="16" 
+                   HorizontalOptions="Center" 
+                   Margin="0,5,0,10" />
+
+            <!-- Ingredients -->
+            <Label Text="Ингредиенты:" 
+                   FontSize="20" 
+                   FontAttributes="Bold" 
+                   Margin="0,10,0,5" />
+            <CollectionView ItemsSource="{Binding Ingredients}"
+                            Margin="0,0,0,10">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal"
+                                     Padding="5">
+                            <Label Text="{Binding IngredientName}" 
+                                   FontSize="16" />
+                            <Label Text=" - " 
+                                   FontSize="16" />
+                            <Label Text="{Binding Quantity}" 
+                                   FontSize="16" />
+                            <Label Text=" (" 
+                                   FontSize="14" 
+                                   TextColor="Gray" />
+                            <Label Text="{Binding IngredientGroup}" 
+                                   FontSize="14" 
+                                   TextColor="Gray" />
+                            <Label Text=")" 
+                                   FontSize="14" 
+                                   TextColor="Gray" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Steps -->
+            <Label Text="Шаги:" 
+                   FontSize="20" 
+                   FontAttributes="Bold" 
+                   Margin="0,10,0,5" />
+            <CollectionView ItemsSource="{Binding Steps}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="5">
+                            <Label Text="{Binding stepnumber}" 
+                                   FontSize="16" 
+                                   FontAttributes="Bold" />
+                            <Label Text="{Binding stepdescription}" 
+                                   FontSize="14" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+
+
+            <ImageButton Source="favorite_icon.png" 
+                     Command="{Binding AddToFavoritesCommand}" 
+                     HeightRequest="50" WidthRequest="50" 
+                     HorizontalOptions="End"
+                     BackgroundColor="Transparent"/>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RecipeApp.Screens.RecipesScreen"
+             xmlns:Classes="clr-namespace:RecipeApp.Classes"
+             xmlns:viewModel="clr-namespace:RecipeApp.ViewModel"
+             xmlns:controls="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
+             Title="RecipesScreen"
+             x:Name="RecipesPage">
+
+    <ContentPage.BindingContext>
+        <viewModel:RecipesViewModel />
+    </ContentPage.BindingContext>
+
+    <Shell.SearchHandler>
+        <controls:SearchHandler
+    Placeholder="Search recipes..."
+    Query="{Binding SearchQuery}"
+    ShowsResults="True"
+    ItemsSource="{Binding Recipes}"
+    Command="{Binding SearchCommand}" />
+
+    </Shell.SearchHandler>
+
+    <ScrollView>
+        <StackLayout>
+            <CollectionView ItemsSource="{Binding Recipes}" SelectionMode="None">
+                
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="5" Padding="10" Margin="5">
+                            <StackLayout>
+                                <ImageButton Source="{Binding img}" 
+                                     HeightRequest="100" 
+                                     Aspect="AspectFill"
+                                     Command="{Binding BindingContext.RecipeSelectedCommand, Source={x:Reference RecipesPage}}"
+                                     CommandParameter="{Binding .}" />
+                                <Label Text="{Binding recipename}" FontSize="16" />
+                                <Label Text="{Binding recipedescription}" FontSize="14" />
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ScrollView>
+    
+
+</ContentPage>
