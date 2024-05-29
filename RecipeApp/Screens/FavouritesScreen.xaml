@@ -1,12 +1,55 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:RecipeApp.ViewModel"
              x:Class="RecipeApp.Screens.FavouritesScreen"
-             Title="FavouritesScreen">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:controls="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
+             x:Name="Page"
+             Title="Избранное">
+    <ContentPage.BindingContext>
+        <viewModel:FavouritesViewModel />
+    </ContentPage.BindingContext>
+
+    <Shell.SearchHandler>
+        <controls:SearchHandler
+    Placeholder="Search recipes..."
+    Query="{Binding SearchQuery}"
+    ShowsResults="True"
+    ItemsSource="{Binding FavoriteRecipes}"
+    Command="{Binding SearchCommand}" />
+
+    </Shell.SearchHandler>
+
+    <ScrollView>
+        <StackLayout>
+            <!--<SearchBar Placeholder="Поиск рецептов" 
+               Text="{Binding SearchQuery}"
+               SearchCommand="{Binding SearchCommand}" /> -->
+            <CollectionView ItemsSource="{Binding FavoriteRecipes}" SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="5" Padding="10" Margin="5">
+                            <StackLayout>
+                                <ImageButton Source="{Binding img}" 
+                                     HeightRequest="100" 
+                                     Aspect="AspectFill"
+                                     Command="{Binding BindingContext.RecipeSelectedCommand, Source={x:Reference Page}}"
+                                     CommandParameter="{Binding .}" />
+                                <Label Text="{Binding recipename}" FontSize="18" FontAttributes="Bold" />
+                                <Label Text="{Binding recipedescription}" FontSize="14" />
+                                <ImageButton Source="unfavorite_icon.png"
+                                     Command="{Binding BindingContext.RemoveFromFavoritesCommand, Source={x:Reference Page}}"
+                                     CommandParameter="{Binding .}"
+                                     HeightRequest="50"
+                                     WidthRequest="50"
+                                     HorizontalOptions="End"
+                                     BackgroundColor="Transparent" />
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ScrollView>
+    
 </ContentPage>

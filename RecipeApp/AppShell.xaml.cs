@@ -9,7 +9,7 @@ namespace RecipeApp
         public AppShell()
         {
             InitializeComponent();
-            BindingContext = ViewModel;
+            BindingContext = App.UserViewModel;
         }
 
         private async void OnAddRecipeButtonClicked(object sender, EventArgs e)

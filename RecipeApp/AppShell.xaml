@@ -8,14 +8,15 @@
     Shell.FlyoutBehavior="Flyout"
     Title="RecipeApp">
 
+    
     <Shell.FlyoutHeader>
         <StackLayout>
-            <Label Text="{Binding UserName}" FontSize="Large" HorizontalOptions="Center" />
+            <Label Text="{Binding FullName}" FontSize="Large" HorizontalOptions="Center" />
+            <Label Text="{Binding UserName}" FontSize="Medium" HorizontalOptions="Center" />
             <Button Text="Добавить рецепт" Clicked="OnAddRecipeButtonClicked" />
             <Button Text="Мои рецепты" />
         </StackLayout>
     </Shell.FlyoutHeader>
-
     <TabBar>
         <Tab Title="Продукты">
             <ShellContent ContentTemplate="{DataTemplate screens:ProductsScreen}"></ShellContent>

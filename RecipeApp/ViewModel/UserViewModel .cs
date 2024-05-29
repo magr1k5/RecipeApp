@@ -9,7 +9,22 @@ namespace RecipesApp.ViewModel
 {
     public class UserViewModel : INotifyPropertyChanged
     {
+        private string _fullName;
         private string _userName;
+
+        public string FullName
+        {
+            get { return _fullName; }
+            set
+            {
+                if (_fullName != value)
+                {
+                    _fullName = value;
+                    OnPropertyChanged(nameof(FullName));
+                }
+            }
+        }
+
         public string UserName
         {
             get { return _userName; }

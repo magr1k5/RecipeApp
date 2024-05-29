@@ -44,6 +44,7 @@ namespace RecipeApp.ViewModel
                     if (added)
                     {
                         await Application.Current.MainPage.DisplayAlert("Успешно", "Рецепт добавлен в избранное.", "OK");
+                        MessagingCenter.Send(this, "FavoriteRecipesUpdated");
                     }
                     else
                     {

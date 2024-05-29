@@ -43,6 +43,10 @@ public partial class LoginScreen : ContentPage
             App.CurrentUser = currentUser;
             string welcomeMessage = $"Добро пожаловать {currentUser.Name} {currentUser.Surname}";
             await DisplayAlert("Добро пожаловать", welcomeMessage, "Ок");
+
+            App.UserViewModel.FullName = $"{currentUser.Name} {currentUser.Surname}";
+            App.UserViewModel.UserName = currentUser.Username;
+
             await Navigation.PushAsync(new MainScreen());
             //SetTopBarVisibility(true);
         }
