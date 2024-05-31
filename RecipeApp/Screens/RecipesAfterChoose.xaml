@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RecipeApp.Screens.RecipesAfterChoose"
+             xmlns:viewModel="clr-namespace:RecipeApp.ViewModel"
+             x:Name="RecipesAfterChoosee"
+             Title="RecipesAfterChoose">
+               
+    <ContentPage.BindingContext>
+        <viewModel:RecipesAfterChooseViewModel />
+    </ContentPage.BindingContext>
+
+
+    <ScrollView>
+        <StackLayout>
+            <Label Text="Рецепты на основе ваших продуктов:" FontSize="20" />
+            <CollectionView ItemsSource="{Binding Recipes}" SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="5" Padding="10" Margin="5">
+                            <StackLayout>
+                                <ImageButton Source="{Binding img}" 
+                                HeightRequest="100" 
+                                Aspect="AspectFill"
+                                Command="{Binding BindingContext.RecipeSelectedCommand, Source={x:Reference RecipesAfterChoosee}}"
+                                CommandParameter="{Binding .}" />
+                                <Label Text="{Binding recipename}" FontSize="16" />
+                                <Label Text="{Binding recipedescription}" FontSize="14" />
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <FormattedString.Spans>
+                                                <Span Text="{Binding MissingIngredientsText}" FontSize="18" FontAttributes="Bold" />
+                                            </FormattedString.Spans>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding MissingIngredientsCount}" Value="0">
+                                            <Setter Property="TextColor" Value="Green" />
+                                            <Setter Property="Text" Value="МОЖНО НАЧИНАТЬ ГОТОВИТЬ" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Label" Binding="{Binding MissingIngredientsCount}" Value="1">
+                                            <Setter Property="TextColor" Value="Red" />
+                                            <Setter Property="Text" Value="{Binding MissingIngredientsText}" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Label" Binding="{Binding MissingIngredientsCount}" Value="2">
+                                            <Setter Property="TextColor" Value="Red" />
+                                            <Setter Property="Text" Value="{Binding MissingIngredientsText}" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Label" Binding="{Binding MissingIngredientsCount}" Value="3">
+                                            <Setter Property="TextColor" Value="Red" />
+                                            <Setter Property="Text" Value="{Binding MissingIngredientsText}" />
+                                        </DataTrigger>
+                                        <!-- Add more DataTriggers for higher counts if needed -->
+                                    </Label.Triggers>
+                                </Label>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

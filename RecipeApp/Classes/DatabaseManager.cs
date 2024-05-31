@@ -117,7 +117,8 @@ namespace RecipeApp.Classes
                         {
                             IngredientID = reader.GetInt32(0),
                             IngredientName = reader.GetString(1),
-                            IngredientGroup = reader.GetString(2)
+                            IngredientGroup = reader.GetString(2),
+                            Img = reader.GetString(3)
                         };
                         ingredients.Add(ingredient);
                     }
@@ -126,6 +127,9 @@ namespace RecipeApp.Classes
             CloseConnection();
             return ingredients;
         }
+
+        
+
 
         public List<Ingredient> GetIngredientsForRecipe(int recipeId)
         {
@@ -148,7 +152,8 @@ namespace RecipeApp.Classes
                             IngredientID = reader.GetInt32(0),
                             IngredientName = reader.GetString(1),
                             IngredientGroup = reader.GetString(2),
-                            Quantity = reader.GetString(3)
+                            Img = reader.GetString(3),
+                            Quantity = reader.GetString(4)
                         };
                         recipeIngredients.Add(recipeIngredient);
                     }

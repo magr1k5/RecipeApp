@@ -14,6 +14,9 @@ namespace RecipeApp
             UserViewModel = new UserViewModel();
             MainPage = new AppShell();
             Routing.RegisterRoute("RegisterScreen", typeof(RegisterScreen));
+
+            Resources.Add("BoolToColorConverter", new BoolToColorConverter());
+            Resources.Add("InverseBoolConverter", new InverseBoolConverter());
         }
     }
 }

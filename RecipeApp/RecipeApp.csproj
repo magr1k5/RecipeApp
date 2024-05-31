@@ -85,6 +85,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Screens\RecipesAfterChoose.xaml.cs">
+	    <DependentUpon>RecipesAfterChoose.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="Screens\AddRecipeScreen.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -98,6 +104,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Screens\MainScreen.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Screens\RecipesAfterChoose.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Screens\ProductsScreen.xaml">

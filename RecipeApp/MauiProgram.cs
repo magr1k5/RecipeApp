@@ -24,6 +24,7 @@ namespace RecipeApp
             builder.Services.AddSingleton<RecipesScreen>();
             builder.Services.AddSingleton<RegisterScreen>();
             builder.Services.AddSingleton<RecipeDetails>();
+            builder.Services.AddSingleton<RecipesAfterChoose>();
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

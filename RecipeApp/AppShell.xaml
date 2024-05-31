@@ -45,7 +45,7 @@
         Route="MainPage" />
 
         <ShellContent Route="RecipeDetails" ContentTemplate="{DataTemplate screens:RecipeDetails}" />
-
+        <ShellContent Route="RecipesAfterChoose" ContentTemplate="{DataTemplate screens:RecipesAfterChoose}" />
     </TabBar>
 
 
