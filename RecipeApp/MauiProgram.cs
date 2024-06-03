@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using RecipeApp.Screens;
+using RecipesApp.Screens;
 
 namespace RecipeApp
 {
@@ -25,6 +26,7 @@ namespace RecipeApp
             builder.Services.AddSingleton<RegisterScreen>();
             builder.Services.AddSingleton<RecipeDetails>();
             builder.Services.AddSingleton<RecipesAfterChoose>();
+            builder.Services.AddSingleton<AddRecipeScreen>();
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

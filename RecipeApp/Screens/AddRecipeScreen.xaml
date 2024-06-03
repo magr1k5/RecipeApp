@@ -1,14 +1,67 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:RecipeApp.ViewModel"
              x:Class="RecipesApp.Screens.AddRecipeScreen"
-             Title="AddRecipeScreen">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Button Text="Добавить рецепт" Clicked="OnSubmitButtonClicked" />
+             x:Name="AddRecipePage"
+             Title="Добавить рецепт">
 
-    </VerticalStackLayout>
+    <ContentPage.BindingContext>
+        <viewModel:AddRecipeViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="10">
+            <Label Text="Название рецепта" FontAttributes="Bold" />
+            <Entry Text="{Binding RecipeName}" Placeholder="Введите название рецепта" />
+
+            <Label Text="Описание рецепта" FontAttributes="Bold" />
+            <Editor Text="{Binding RecipeDescription}" Placeholder="Введите описание рецепта" HeightRequest="100" />
+
+            <Label Text="Категория рецепта" FontAttributes="Bold" />
+            <Picker ItemsSource="{Binding RecipeGroups}" 
+                    SelectedItem="{Binding SelectedRecipeGroup}"
+                    Title="Выберите категорию" />
+
+            <Label Text="Ингредиенты" FontAttributes="Bold" />
+            <HorizontalStackLayout>
+                <Picker ItemsSource="{Binding Ingredients}" 
+                        ItemDisplayBinding="{Binding IngredientName}" 
+                        SelectedItem="{Binding SelectedIngredient}"
+                        Title="Выберите ингредиент" />
+                <Entry Text="{Binding IngredientQuantity}" Placeholder="Количество" WidthRequest="100" />
+                <Picker ItemsSource="{Binding Units}" SelectedItem="{Binding SelectedUnit}" WidthRequest="100" />
+                <ImageButton Source="add.png" Command="{Binding AddIngredientCommand}" />
+            </HorizontalStackLayout>
+            <CollectionView ItemsSource="{Binding RecipeIngredients}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding IngredientName}" />
+                            <Label Text="{Binding IngredientGroup}" />
+                            <ImageButton Source="remove.png" Command="{Binding BindingContext.RemoveIngredientCommand, Source={x:Reference AddRecipePage}}" CommandParameter="{Binding .}" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Text="Шаги приготовления" FontAttributes="Bold" />
+            <HorizontalStackLayout>
+                <Entry Text="{Binding StepDescription}" Placeholder="Введите шаг" />
+                <ImageButton Source="add.png" Command="{Binding AddStepCommand}" />
+            </HorizontalStackLayout>
+            <CollectionView ItemsSource="{Binding RecipeSteps}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding stepdescription}" />
+                            <ImageButton Source="remove.png" Command="{Binding BindingContext.RemoveStepCommand, Source={x:Reference AddRecipePage}}" CommandParameter="{Binding .}" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Text="Сохранить рецепт" Command="{Binding SaveRecipeCommand}" />
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
