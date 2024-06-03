@@ -11,7 +11,7 @@ public partial class RecipesAfterChoose : ContentPage
     public RecipesAfterChoose()
 	{
 		InitializeComponent();
-        BindingContext = new RecipesAfterChooseViewModel();
+        BindingContext = App.RecipesViewModel;
 
     }
 

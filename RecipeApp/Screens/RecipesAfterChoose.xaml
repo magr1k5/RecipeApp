@@ -3,13 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RecipeApp.Screens.RecipesAfterChoose"
              xmlns:viewModel="clr-namespace:RecipeApp.ViewModel"
-             x:Name="RecipesAfterChoosee"
+             x:Name="RecipesAfterChoosePage"
              Title="RecipesAfterChoose">
-               
+
     <ContentPage.BindingContext>
         <viewModel:RecipesAfterChooseViewModel />
     </ContentPage.BindingContext>
-
 
     <ScrollView>
         <StackLayout>
@@ -20,10 +19,10 @@
                         <Frame CornerRadius="5" Padding="10" Margin="5">
                             <StackLayout>
                                 <ImageButton Source="{Binding img}" 
-                                HeightRequest="100" 
-                                Aspect="AspectFill"
-                                Command="{Binding BindingContext.RecipeSelectedCommand, Source={x:Reference RecipesAfterChoosee}}"
-                                CommandParameter="{Binding .}" />
+                                    HeightRequest="100" 
+                                    Aspect="AspectFill"
+                                    Command="{Binding BindingContext.RecipeSelectedCommand, Source={x:Reference RecipesAfterChoosePage}}"
+                                    CommandParameter="{Binding .}" />
                                 <Label Text="{Binding recipename}" FontSize="16" />
                                 <Label Text="{Binding recipedescription}" FontSize="14" />
                                 <Label>
@@ -51,9 +50,11 @@
                                             <Setter Property="TextColor" Value="Red" />
                                             <Setter Property="Text" Value="{Binding MissingIngredientsText}" />
                                         </DataTrigger>
-                                        <!-- Add more DataTriggers for higher counts if needed -->
                                     </Label.Triggers>
                                 </Label>
+                                <Label Text="Недостающие ингредиенты:" FontSize="14" FontAttributes="Bold" IsVisible="{Binding MissingIngredientsCount, Converter={StaticResource NonZeroToBoolConverter}}" />
+                                <Label Text="{Binding MissingIngredientNamesText}" FontSize="14" LineBreakMode="WordWrap" IsVisible="{Binding MissingIngredientsCount, Converter={StaticResource NonZeroToBoolConverter}}" />
+                                <Button Text="Добавить в список" Command="{Binding BindingContext.AddToShoppingListCommand, Source={x:Reference RecipesAfterChoosePage}}" CommandParameter="{Binding .}" IsVisible="{Binding MissingIngredientsCount, Converter={StaticResource NonZeroToBoolConverter}}" />
                             </StackLayout>
                         </Frame>
                     </DataTemplate>

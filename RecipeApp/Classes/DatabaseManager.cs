@@ -73,6 +73,27 @@ namespace RecipeApp.Classes
             return user;
         }
 
+
+        public List<string> GetUserIngredients(int userId)
+        {
+            List<string> userIngredients = new List<string>();
+
+            using (var cmd = new NpgsqlCommand("SELECT ingredientid FROM useringredients WHERE userid = @userId", GetConnection()))
+            {
+                cmd.Parameters.AddWithValue("userId", userId);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        userIngredients.Add(reader.GetString(0));
+                    }
+                }
+            }
+
+            return userIngredients;
+        }
+
         public List<Recipes> GetRecipes()
         {
             OpenConnection();

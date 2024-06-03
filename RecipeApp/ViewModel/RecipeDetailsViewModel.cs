@@ -5,6 +5,7 @@ using RecipeApp.Classes;
 
 namespace RecipeApp.ViewModel
 {
+
     public class RecipeDetailsViewModel : BindableObject
     {
         private Recipes _recipe;

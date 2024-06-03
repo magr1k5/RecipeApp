@@ -28,6 +28,8 @@ namespace RecipeApp.Screens
             BindingContext = new RecipeDetailsViewModel();
         }
 
-        
+            
+
+
     }
 }
