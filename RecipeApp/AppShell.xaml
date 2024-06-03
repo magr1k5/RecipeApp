@@ -14,7 +14,7 @@
             <Label Text="{Binding FullName}" FontSize="Large" HorizontalOptions="Center" />
             <Label Text="{Binding UserName}" FontSize="Medium" HorizontalOptions="Center" />
             <Button Text="Добавить рецепт" Clicked="OnAddRecipeButtonClicked" />
-            <Button Text="Мои рецепты" />
+            <Button Text="Мои рецепты" Clicked="OnUserRecipesButtonClicked"/>
         </StackLayout>
     </Shell.FlyoutHeader>
     <TabBar>

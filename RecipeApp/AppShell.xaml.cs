@@ -18,5 +18,10 @@ namespace RecipeApp
             Routing.RegisterRoute("RecipeDetails", typeof(RecipeDetails));
 
         }
+
+        private async void OnUserRecipesButtonClicked(object sender , EventArgs e)
+        {
+            await Navigation.PushAsync(new UsersRecipesScreen());
+        }
     }
 }

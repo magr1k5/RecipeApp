@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RecipeApp.Screens.UsersRecipesScreen"
+             xmlns:viewModel ="clr-namespace:RecipeApp.ViewModel"
+             Title="UsersRecipesScreen">
+
+    <ContentPage.BindingContext>
+        <viewModel:UsersRecipesViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <StackLayout>
+            <Label Text="Ваши рецепты" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" />
+
+            <CollectionView ItemsSource="{Binding UserRecipes}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10" Margin="5" BorderColor="LightGray">
+                            <VerticalStackLayout>
+                                <Image Source="{Binding img}" HeightRequest="200" Aspect="AspectFill">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:UsersRecipesViewModel}}, Path=NavigateToRecipeDetailsCommand}" CommandParameter="{Binding .}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Label Text="{Binding recipename}" FontSize="Medium" FontAttributes="Bold" />
+                                <Label Text="{Binding recipedescription}" FontSize="Small" />
+                                <Label Text="{Binding recipegroup}" FontSize="Small" FontAttributes="Italic" />
+                                <Label FontSize="Small">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding pending}" Value="true">
+                                            <Setter Property="Text" Value="Рецепт находится на модерации, ожидайте публикации" />
+                                            <Setter Property="TextColor" Value="Red" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Label" Binding="{Binding pending}" Value="false">
+                                            <Setter Property="Text" Value="Рецепт опубликован!" />
+                                            <Setter Property="TextColor" Value="Green" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
