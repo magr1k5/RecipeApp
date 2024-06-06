@@ -11,16 +11,22 @@
     </ContentPage.BindingContext>
 
     <ScrollView>
-        <StackLayout>
+        <StackLayout Padding="10" Spacing="10">
             <CollectionView ItemsSource="{Binding Ingredients}" SelectionMode="Multiple" SelectionChanged="OnSelectionChanged">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame CornerRadius="5" Padding="10" Margin="5">
-                            <StackLayout>
-                                <Image Source="{Binding Img}" HeightRequest="100" Aspect="AspectFill"/>
-                                <Label Text="{Binding IngredientName}" FontSize="16" />
-                                <Label Text="{Binding IngredientGroup}" FontSize="14" />
-                            </StackLayout>
+                        <Frame CornerRadius="10" Padding="10" Margin="5">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" Source="{Binding Img}" HeightRequest="60" Aspect="AspectFit"/>
+                                <StackLayout Grid.Column="1" VerticalOptions="Center">
+                                    <Label Text="{Binding IngredientName}" FontSize="18" />
+                                    <Label Text="{Binding IngredientGroup}" FontSize="16" />
+                                </StackLayout>
+                            </Grid>
                             <Frame.BackgroundColor>
                                 <MultiBinding Converter="{StaticResource BoolToColorConverter}">
                                     <Binding Path="IngredientID" />
@@ -32,7 +38,8 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <Button Text="Далее" Command="{Binding NextCommand}" />
+            <Button Text="Далее" Command="{Binding NextCommand}" HorizontalOptions="FillAndExpand" BackgroundColor="#512BD4" TextColor="White" CornerRadius="10" />
         </StackLayout>
     </ScrollView>
 </ContentPage>
+

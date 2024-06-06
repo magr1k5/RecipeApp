@@ -3,10 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RecipeApp.MainPage">
 
+    <ContentPage.Resources>
+        <Style TargetType="Label" x:Key="Headline">
+            <Setter Property="TextColor" Value="#512BD4" />
+            <Setter Property="FontSize" Value="28" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="Margin" Value="0, 10" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+        </Style>
+        <Style TargetType="Label" x:Key="SubHeadline">
+            <Setter Property="TextColor" Value="#333333" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="Margin" Value="0, 10" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+        </Style>
+        <Style TargetType="Button" x:Key="PrimaryButton">
+            <Setter Property="BackgroundColor" Value="#512BD4" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="Margin" Value="0, 10" />
+            <Setter Property="HeightRequest" Value="50" />
+            <Setter Property="CornerRadius" Value="10" />
+        </Style>
+    </ContentPage.Resources>
+
     <ScrollView>
-        <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25">
+        <VerticalStackLayout Padding="30,0" Spacing="25">
             <Image
                 Source="hat.png"
                 HeightRequest="185"
@@ -28,12 +49,14 @@
                 x:Name="NavigateToLogin"
                 Text="Войти"
                 Clicked="ToLoginScreen"
+                Style="{StaticResource PrimaryButton}"
                 HorizontalOptions="Fill"/>
 
             <Button
                 x:Name="NavigateToRegister"
                 Text="Зарегистрироваться" 
                 Clicked="ToRegisterScreen"
+                Style="{StaticResource PrimaryButton}"
                 HorizontalOptions="Fill" />
         </VerticalStackLayout>
     </ScrollView>

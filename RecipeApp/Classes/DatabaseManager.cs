@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Npgsql;
 
+
 namespace RecipeApp.Classes
 {
     public class DatabaseManager : IDisposable
@@ -120,6 +121,70 @@ namespace RecipeApp.Classes
             CloseConnection();
             return recipes;
         }
+
+
+        public void CreateEvent(string eventName, int userId, List<int> recipeIds)
+        {
+            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string insertEventQuery = "INSERT INTO userevent (eventname, userid, recipes) VALUES (@eventName, @userId, @recipes)";
+                using (NpgsqlCommand command = new NpgsqlCommand(insertEventQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@eventName", eventName);
+                    command.Parameters.AddWithValue("@userId", userId);
+                    command.Parameters.AddWithValue("@recipes", recipeIds.ToArray());
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void DeleteEvent(int eventId)
+        {
+            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string deleteEventQuery = "DELETE FROM userevent WHERE eventid = @eventId";
+                using (NpgsqlCommand command = new NpgsqlCommand(deleteEventQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@eventId", eventId);
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+
+        public List<UserEvent> GetUserEvents(int userId)
+        {
+            List<UserEvent> events = new List<UserEvent>();
+            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "SELECT * FROM userevent WHERE userid = @userId";
+                using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@userId", userId);
+                    using (NpgsqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            UserEvent userEvent = new UserEvent
+                            {
+                                EventId = (int)reader["eventid"],
+                                EventName = reader["eventname"].ToString(),
+                                UserId = (int)reader["userid"],
+                                RecipeIds = reader["recipes"] as int[]
+                            };
+                            events.Add(userEvent);
+                        }
+                    }
+                }
+            }
+            return events;
+        }
+
 
         public List<Ingredient> GetIngredients()
         {

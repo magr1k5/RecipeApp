@@ -12,44 +12,46 @@
 
     <Shell.SearchHandler>
         <controls:SearchHandler
-    Placeholder="Search recipes..."
-    Query="{Binding SearchQuery}"
-    ShowsResults="True"
-    ItemsSource="{Binding FavoriteRecipes}"
-    Command="{Binding SearchCommand}" />
-
+            Placeholder="Поиск рецептов..."
+            Query="{Binding SearchQuery}"
+            ShowsResults="True"
+            ItemsSource="{Binding FavoriteRecipes}"
+            Command="{Binding SearchCommand}" />
     </Shell.SearchHandler>
 
     <ScrollView>
-        <StackLayout>
-            <!--<SearchBar Placeholder="Поиск рецептов" 
-               Text="{Binding SearchQuery}"
-               SearchCommand="{Binding SearchCommand}" /> -->
+        <StackLayout Padding="10" Spacing="10">
             <CollectionView ItemsSource="{Binding FavoriteRecipes}" SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame CornerRadius="5" Padding="10" Margin="5">
-                            <StackLayout>
+                        <Frame CornerRadius="10" Padding="10" Margin="5" BackgroundColor="#EFEFEF">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
                                 <ImageButton Source="{Binding img}" 
-                                     HeightRequest="100" 
-                                     Aspect="AspectFill"
-                                     Command="{Binding BindingContext.RecipeSelectedCommand, Source={x:Reference Page}}"
-                                     CommandParameter="{Binding .}" />
-                                <Label Text="{Binding recipename}" FontSize="18" FontAttributes="Bold" />
-                                <Label Text="{Binding recipedescription}" FontSize="14" />
-                                <ImageButton Source="unfavorite_icon.png"
-                                     Command="{Binding BindingContext.RemoveFromFavoritesCommand, Source={x:Reference Page}}"
-                                     CommandParameter="{Binding .}"
-                                     HeightRequest="50"
-                                     WidthRequest="50"
-                                     HorizontalOptions="End"
-                                     BackgroundColor="Transparent" />
-                            </StackLayout>
+                                             HeightRequest="150" 
+                                             Aspect="AspectFill"
+                                             Command="{Binding BindingContext.RecipeSelectedCommand, Source={x:Reference Page}}"
+                                             CommandParameter="{Binding .}" />
+                                <Label Grid.Row="1" Text="{Binding recipename}" FontSize="20" FontAttributes="Bold" />
+                                <Label Grid.Row="2" Text="{Binding recipedescription}" FontSize="16" />
+                                <ImageButton Grid.Row="0" Grid.RowSpan="3"
+                                             Source="unfavorite_icon.png"
+                                             Command="{Binding BindingContext.RemoveFromFavoritesCommand, Source={x:Reference Page}}"
+                                             CommandParameter="{Binding .}"
+                                             HeightRequest="40"
+                                             WidthRequest="40"
+                                             HorizontalOptions="End"
+                                             BackgroundColor="Transparent"
+                                             Margin="0,10,10,0" />
+                            </Grid>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </StackLayout>
     </ScrollView>
-    
 </ContentPage>

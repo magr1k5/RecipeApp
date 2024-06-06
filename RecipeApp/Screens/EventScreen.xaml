@@ -2,11 +2,47 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RecipeApp.Screens.EventScreen"
-             Title="EventScreen">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="Мои события">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#6200EE" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="CornerRadius" Value="25" />
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="Margin" Value="10" />
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="#333333" />
+                <Setter Property="FontSize" Value="18" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="20">
+            <Button Text="Создать событие" Clicked="OnCreateEventButtonClicked" />
+            <CollectionView x:Name="EventsCollectionView" ItemsLayout="VerticalList" ItemSizingStrategy="MeasureAllItems">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="#6200EE" CornerRadius="10" Padding="10" Margin="5">
+                            <StackLayout>
+                                <Label Text="{Binding EventName}" FontSize="24" FontAttributes="Bold" TextColor="#6200EE" />
+                                <CollectionView ItemsSource="{Binding Recipes}" ItemsLayout="VerticalList" Margin="0,10,0,0">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Frame BorderColor="#cccccc" CornerRadius="10" Padding="10" Margin="5">
+                                                <Label Text="{Binding recipename}" />
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                                <Button Text="Удалить событие" CommandParameter="{Binding EventId}" Clicked="OnDeleteEventButtonClicked" BackgroundColor="#FF3B30" />
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
