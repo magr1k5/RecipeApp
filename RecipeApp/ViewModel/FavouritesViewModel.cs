@@ -30,7 +30,9 @@ namespace RecipeApp.ViewModel
 
         public FavouritesViewModel()
         {
-            _dbManager = new DatabaseManager("User Id=postgres;Host=localhost;Database=recipe_app_db;Port=5432;password=root");
+            var localhost = "localhost";
+            var android_local = "10.0.2.2";
+            _dbManager = new DatabaseManager($"User Id=postgres;Host={android_local};Database=recipe_app_db;Port=5432;password=root;");
             FavoriteRecipes = new ObservableCollection<Recipes>();
             RemoveFromFavoritesCommand = new Command<Recipes>(async (recipe) => await RemoveFromFavoritesAsync(recipe));
             RecipeSelectedCommand = new Command<Recipes>(OnRecipeSelected);

@@ -19,10 +19,14 @@ namespace RecipeApp.ViewModel
         public ObservableCollection<Ingredient> Ingredients { get; set; }
         public ObservableCollection<Ingredient> SelectedIngredients { get; set; }
         public ICommand NextCommand { get; }
+        public string SearchQuery { get; set; }
+        public ICommand SearchCommand { get; set; }
 
         public ProductsViewModel()
         {
-            dbManager = new DatabaseManager($"User Id=postgres;Host=localhost;Database=recipe_app_db;Port=5432;password=root");
+            var localhost = "localhost";
+            var android_local = "10.0.2.2";
+            dbManager = new DatabaseManager($"User Id=postgres;Host={android_local};Database=recipe_app_db;Port=5432;password=root;");
             Ingredients = new ObservableCollection<Ingredient>(GetIngredients());
             SelectedIngredients = new ObservableCollection<Ingredient>();
             SelectedIngredients.CollectionChanged += OnSelectedIngredientsChanged;

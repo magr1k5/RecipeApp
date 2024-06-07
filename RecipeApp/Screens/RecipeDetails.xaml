@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RecipeApp.Screens.RecipeDetails"
              xmlns:viewModel="clr-namespace:RecipeApp.ViewModel"
-             Title="Recipe Details">
+             Title="Детали рецепта">
 
     <ContentPage.BindingContext>
         <viewModel:RecipeDetailsViewModel />

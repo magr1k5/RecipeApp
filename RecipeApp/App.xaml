@@ -13,7 +13,6 @@
                     <class:BoolToColorConverter x:Key="BoolToColorConverter" />
                     <class:InverseBoolConverter x:Key="InverseBoolConverter" />
                     <class:GreaterThanZeroConverter x:Key="GreaterThanZeroConverter" />
-                    <class:BoolToColorConverter2 x:Key="BoolToColorConverter2" />
                     <class:NonZeroToBoolConverter x:Key="NonZeroToBoolConverter" />
                     
                 </ResourceDictionary>

@@ -639,6 +639,41 @@ namespace RecipeApp.Classes
             }
         }
 
+
+        public Users GetUserById(int userId)
+        {
+            Users user = null;
+            OpenConnection(); // Открытие соединения
+            try
+            {
+                using (var cmd = new NpgsqlCommand("SELECT userid, username, name, surname FROM users WHERE userid = @userId", GetConnection()))
+                {
+                    cmd.Parameters.AddWithValue("userId", userId);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            user = new Users
+                            {
+                                Id = reader.GetInt32(0),
+                                Username = reader.GetString(1),
+                                Name = reader.GetString(2),
+                                Surname = reader.GetString(3)
+                            };
+                        }
+                    }
+                }
+            }
+            finally
+            {
+                CloseConnection(); // Закрытие соединения
+            }
+            return user;
+        }
+
+
+
+
         public List<Recipes> SearchRecipesInDatabase(string searchQuery)
         {
             List<Recipes> searchResults = new List<Recipes>();

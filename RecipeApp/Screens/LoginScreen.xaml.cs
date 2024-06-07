@@ -1,6 +1,7 @@
 namespace RecipeApp.Screens;
 using Npgsql;
 using RecipeApp.Classes;
+
 public partial class LoginScreen : ContentPage
 {
     private Entry usernameEntry;
@@ -8,10 +9,8 @@ public partial class LoginScreen : ContentPage
     private DatabaseManager dbManager;
 
     public LoginScreen()
-	{
-
-
-		InitializeComponent();
+    {
+        InitializeComponent();
 
         usernameEntry = new Entry { Placeholder = "Введите ваше имя пользователя" };
         passwordEntry = new Entry { Placeholder = "Введите ваш пароль", IsPassword = true };
@@ -25,8 +24,7 @@ public partial class LoginScreen : ContentPage
             Children = { usernameEntry, passwordEntry, loginButton }
         };
 
-        dbManager = new DatabaseManager($"User Id=postgres;Host={localhost};Database=recipe_app_db;Port=5432;password=root"); // 192.168.0.101
-
+        dbManager = new DatabaseManager($"User Id=postgres;Host={android_local};Database=recipe_app_db;Port=5432;password=root");
     }
 
     private async void OnLoginButtonClicked(object sender, EventArgs e)
@@ -47,27 +45,18 @@ public partial class LoginScreen : ContentPage
             App.UserViewModel.FullName = $"{currentUser.Name} {currentUser.Surname}";
             App.UserViewModel.UserName = currentUser.Username;
 
-            await Navigation.PushAsync(new MainScreen());
-            //SetTopBarVisibility(true);
+            if (currentUser.RoleName == "Admin")
+            {
+                App.Current.MainPage = new AdminShell(); // Навигационное меню для администратора
+            }
+            else
+            {
+                App.Current.MainPage = new AppShell(); // Обычное навигационное меню
+            }
         }
         else
         {
             await DisplayAlert("Ошибка", "Ошибка. Пароль или логин неверные", "Ок");
         }
-
     }
-
-    /*private void SetTopBarVisibility(bool isVisible)
-    {
-        if (Application.Current.MainPage is Shell shell)
-        {
-            if (shell.CurrentItem is ShellItem shellItem)
-            {
-                if (shellItem.CurrentItem is ShellSection shellSection)
-                {
-                    shellSection.TitleViewVisibility = isVisible ? ShellTitleViewVisibility.Default : ShellTitleViewVisibility.Hidden;
-                }
-            }
-        }
-    }*/
 }

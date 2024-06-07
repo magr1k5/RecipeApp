@@ -3,12 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RecipeApp.Screens.ProductsScreen"
              xmlns:viewModel="clr-namespace:RecipeApp.ViewModel"
-             Title="ProductsScreen"
+             xmlns:controls="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
+             Title="Продукты"
              x:Name="ProductsPage">
 
     <ContentPage.BindingContext>
         <viewModel:ProductsViewModel />
     </ContentPage.BindingContext>
+
+    <Shell.SearchHandler>
+        <controls:SearchHandler
+    Placeholder="Поиск..."
+    Query="{Binding SearchQuery}"
+    ShowsResults="True"
+    ItemsSource="{Binding Recipes}"
+    Command="{Binding SearchCommand}" />
+    </Shell.SearchHandler>
+
 
     <ScrollView>
         <StackLayout Padding="10" Spacing="10">

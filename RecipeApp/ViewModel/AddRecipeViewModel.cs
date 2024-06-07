@@ -16,7 +16,9 @@ namespace RecipeApp.ViewModel
 
         public AddRecipeViewModel()
         {
-            dbManager = new DatabaseManager("User Id=postgres;Host=localhost;Database=recipe_app_db;Port=5432;password=root;");
+            var localhost = "localhost";
+            var android_local = "10.0.2.2";
+            dbManager = new DatabaseManager($"User Id=postgres;Host={android_local};Database=recipe_app_db;Port=5432;password=root;");
             Ingredients = new ObservableCollection<Ingredient>(dbManager.GetIngredients());
             RecipeGroups = new ObservableCollection<string>(dbManager.GetRecipeGroups());
             RecipeIngredients = new ObservableCollection<Ingredient>();
@@ -105,7 +107,7 @@ namespace RecipeApp.ViewModel
             if (step != null)
             {
                 RecipeSteps.Remove(step);
-                // Обновляем нумерацию шагов
+               
                 int stepNumber = 1;
                 foreach (var recipeStep in RecipeSteps)
                 {
@@ -124,8 +126,8 @@ namespace RecipeApp.ViewModel
                 return;
             }
 
-            string img = "test.jpg"; // Placeholder image
-            int userId = App.CurrentUser.Id; // Получаем текущего пользователя
+            string img = "test.jpg"; 
+            int userId = App.CurrentUser.Id; 
 
             int recipeId = dbManager.AddRecipe(RecipeName, RecipeDescription, SelectedRecipeGroup, userId, img, true);
 

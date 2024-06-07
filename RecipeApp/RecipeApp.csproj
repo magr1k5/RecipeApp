@@ -86,13 +86,22 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="AdminShell.xaml.cs">
+	    <DependentUpon>AdminShell.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Screens\RecipesAfterChoose.xaml.cs">
 	    <DependentUpon>RecipesAfterChoose.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="AdminShell.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Screens\AddRecipeScreen.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Screens\AdminReviewsScreen.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Screens\EventScreen.xaml">

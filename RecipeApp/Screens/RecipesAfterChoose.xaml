@@ -4,13 +4,23 @@
              x:Class="RecipeApp.Screens.RecipesAfterChoose"
              xmlns:viewModel="clr-namespace:RecipeApp.ViewModel"
              x:Name="RecipesAfterChoosePage"
-             Title="RecipesAfterChoose">
+             xmlns:controls="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
+             Title="Предлагаемые рецепты">
 
     <ContentPage.BindingContext>
         <viewModel:RecipesAfterChooseViewModel />
     </ContentPage.BindingContext>
 
-    <ScrollView>
+    <Shell.SearchHandler>
+        <controls:SearchHandler
+    Placeholder="Поиск..."
+    Query="{Binding SearchQuery}"
+    ShowsResults="True"
+    ItemsSource="{Binding Recipes}"
+    Command="{Binding SearchCommand}" />
+    </Shell.SearchHandler>
+
+        <ScrollView>
         <StackLayout>
             <Label Text="Рецепты на основе ваших продуктов:" FontSize="20" />
             <CollectionView ItemsSource="{Binding Recipes}" SelectionMode="None">
@@ -36,7 +46,7 @@
                                     <Label.Triggers>
                                         <DataTrigger TargetType="Label" Binding="{Binding MissingIngredientsCount}" Value="0">
                                             <Setter Property="TextColor" Value="Green" />
-                                            <Setter Property="Text" Value="МОЖНО НАЧИНАТЬ ГОТОВИТЬ" />
+                                            <Setter Property="Text" Value="Можно начинать готовить!" />
                                         </DataTrigger>
                                         <DataTrigger TargetType="Label" Binding="{Binding MissingIngredientsCount}" Value="1">
                                             <Setter Property="TextColor" Value="Red" />

@@ -2,11 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RecipeApp.Screens.EventScreen"
+             xmlns:controls="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
              Title="Мои события">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="Button">
-                <Setter Property="BackgroundColor" Value="#6200EE" />
+                <Setter Property="BackgroundColor" Value="#268E00" />
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="CornerRadius" Value="25" />
                 <Setter Property="HeightRequest" Value="50" />
@@ -19,15 +20,26 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
+
+
+    <Shell.SearchHandler>
+        <controls:SearchHandler
+ Placeholder="Поиск..."
+ Query="{Binding SearchQuery}"
+ ShowsResults="True"
+ ItemsSource="{Binding Recipes}"
+ Command="{Binding SearchCommand}" />
+    </Shell.SearchHandler>
+
     <ScrollView>
         <StackLayout Padding="20" Spacing="20">
             <Button Text="Создать событие" Clicked="OnCreateEventButtonClicked" />
             <CollectionView x:Name="EventsCollectionView" ItemsLayout="VerticalList" ItemSizingStrategy="MeasureAllItems">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame BorderColor="#6200EE" CornerRadius="10" Padding="10" Margin="5">
+                        <Frame BorderColor="#268E00" CornerRadius="10" Padding="10" Margin="5">
                             <StackLayout>
-                                <Label Text="{Binding EventName}" FontSize="24" FontAttributes="Bold" TextColor="#6200EE" />
+                                <Label Text="{Binding EventName}" FontSize="24" FontAttributes="Bold" TextColor="#268E00" />
                                 <CollectionView ItemsSource="{Binding Recipes}" ItemsLayout="VerticalList" Margin="0,10,0,0">
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate>

@@ -17,6 +17,8 @@ namespace RecipeApp.ViewModel
         public ObservableCollection<RecipeWithMissingIngredients> Recipes { get; set; }
         public ObservableCollection<Recipes> LoadingRecipes { get; set; }
         public ObservableCollection<string> ShoppingList { get; set; }
+        public string SearchQuery { get; set; }
+        public ICommand SearchCommand { get; set; }
 
         public bool CanStartCooking => Recipes.Any(r => r.MissingIngredientsCount == 0);
 
@@ -36,7 +38,9 @@ namespace RecipeApp.ViewModel
 
         public RecipesAfterChooseViewModel()
         {
-            dbManager = new DatabaseManager($"User Id=postgres;Host=localhost;Database=recipe_app_db;Port=5432;password=root");
+            var localhost = "localhost";
+            var android_local = "10.0.2.2";
+            dbManager = new DatabaseManager($"User Id=postgres;Host={android_local};Database=recipe_app_db;Port=5432;password=root;");
             Recipes = new ObservableCollection<RecipeWithMissingIngredients>();
             LoadingRecipes = new ObservableCollection<Recipes>(GetRecipes());
             ShoppingList = new ObservableCollection<string>();
@@ -98,13 +102,13 @@ namespace RecipeApp.ViewModel
             {
                 Debug.WriteLine($"Recipe selected: {recipe.recipename}");
 
-                // Создаем список параметров для навигации
+            
                 var navigationParameters = new List<object>
         {
-            recipe // Добавляем рецепт в список параметров
+            recipe 
         };
 
-                // Выполняем навигацию с параметрами
+                
                 await Shell.Current.GoToAsync("///RecipeDetails", true, new Dictionary<string, object>
         {
             { "NavigationParameters", navigationParameters }
@@ -125,6 +129,32 @@ namespace RecipeApp.ViewModel
             }
             OnPropertyChanged(nameof(ShoppingList));
         }
+
+       /* private void Search()
+        {
+            // Получите текст поискового запроса из свойства SearchQuery
+            string searchQuery = SearchQuery;
+
+            // Если поисковой запрос пустой, загрузите все рецепты
+            if (string.IsNullOrEmpty(searchQuery))
+            {
+                LoadRecipes();
+            }
+            else
+            {
+                // Выполните поиск рецептов по названию, используя searchQuery
+                List<Recipes> searchResults = GetRecipes().Where(r => r.recipename.IndexOf(searchQuery, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+
+                // Обновите свойство Recipes, чтобы отобразить результаты поиска
+                Recipes.Clear();
+                foreach (var recipe in searchResults)
+                {
+                    Recipes.Add(recipe);
+                }
+
+            }
+        }*/
+
 
         public class RecipeWithMissingIngredients : Recipes
         {

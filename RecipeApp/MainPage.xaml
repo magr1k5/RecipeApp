@@ -18,7 +18,7 @@
             <Setter Property="HorizontalOptions" Value="Center" />
         </Style>
         <Style TargetType="Button" x:Key="PrimaryButton">
-            <Setter Property="BackgroundColor" Value="#512BD4" />
+            <Setter Property="BackgroundColor" Value="#268E00" />
             <Setter Property="TextColor" Value="White" />
             <Setter Property="Margin" Value="0, 10" />
             <Setter Property="HeightRequest" Value="50" />

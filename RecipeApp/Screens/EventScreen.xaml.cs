@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace RecipeApp.Screens
 {
@@ -11,11 +12,15 @@ namespace RecipeApp.Screens
         private DatabaseManager dbManager;
         private ObservableCollection<Recipes> allRecipes;
         private ObservableCollection<UserEventViewModel> events;
+        public string SearchQuery { get; set; }
+        public ICommand SearchCommand { get; set; }
 
         public EventScreen()
         {
             InitializeComponent();
-            dbManager = new DatabaseManager("User Id=postgres;Host=localhost;Database=recipe_app_db;Port=5432;password=root;");
+            var localhost = "localhost";
+            var android_local = "10.0.2.2";
+            dbManager = new DatabaseManager($"User Id=postgres;Host={android_local};Database=recipe_app_db;Port=5432;password=root;");
             LoadRecipes();
             LoadUserEvents();
         }

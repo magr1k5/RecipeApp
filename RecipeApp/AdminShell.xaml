@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Shell
-    x:Class="RecipeApp.AppShell"
+    x:Class="RecipeApp.AdminShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:RecipeApp"
@@ -9,13 +9,14 @@
     Title="RecipeApp">
 
 
+    
+
 
     <Shell.FlyoutHeader>
         <StackLayout>
             <Label Text="{Binding FullName}" FontSize="Large" HorizontalOptions="Center" />
             <Label Text="{Binding UserName}" FontSize="Medium" HorizontalOptions="Center" />
-            <Button Text="Добавить рецепт" Clicked="OnAddRecipeButtonClicked" />
-            <Button Text="Мои рецепты" Clicked="OnUserRecipesButtonClicked"/>
+            <Button Text="Проверка рецептов" Clicked="OnReviewRecipesButtonClicked"/>
         </StackLayout>
     </Shell.FlyoutHeader>
     <TabBar>
@@ -39,7 +40,6 @@
             <ShellContent ContentTemplate="{DataTemplate screens:PurchasesScreen}"></ShellContent>
         </Tab>
 
-
         <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
@@ -48,8 +48,4 @@
         <ShellContent Route="RecipeDetails" ContentTemplate="{DataTemplate screens:RecipeDetails}" />
         <ShellContent Route="RecipesAfterChoose" ContentTemplate="{DataTemplate screens:RecipesAfterChoose}" />
     </TabBar>
-
-
-    
-    
 </Shell>

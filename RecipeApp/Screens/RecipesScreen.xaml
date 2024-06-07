@@ -5,7 +5,7 @@
              xmlns:Classes="clr-namespace:RecipeApp.Classes"
              xmlns:viewModel="clr-namespace:RecipeApp.ViewModel"
              xmlns:controls="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
-             Title="RecipesScreen"
+             Title="Рецепты"
              x:Name="RecipesPage">
 
     <ContentPage.BindingContext>
@@ -14,7 +14,7 @@
 
     <Shell.SearchHandler>
         <controls:SearchHandler
-    Placeholder="Search recipes..."
+    Placeholder="Поиск..."
     Query="{Binding SearchQuery}"
     ShowsResults="True"
     ItemsSource="{Binding Recipes}"

@@ -20,7 +20,9 @@ namespace RecipeApp.ViewModel
 
         public RecipesViewModel()
         {
-            dbManager = new DatabaseManager($"User Id=postgres;Host=localhost;Database=recipe_app_db;Port=5432;password=root");
+            var localhost = "localhost";
+            var android_local = "10.0.2.2";
+            dbManager = new DatabaseManager($"User Id=postgres;Host={android_local};Database=recipe_app_db;Port=5432;password=root;");
             Recipes = new ObservableCollection<Recipes>(GetRecipes());
             RecipeSelectedCommand = new Command<Recipes>(OnRecipeSelected);
             SearchCommand = new Command(Search);
@@ -67,20 +69,20 @@ namespace RecipeApp.ViewModel
 
         private void Search()
         {
-            // Получите текст поискового запроса из свойства SearchQuery
+            
             string searchQuery = SearchQuery;
 
-            // Если поисковой запрос пустой, загрузите все рецепты
+          
             if (string.IsNullOrEmpty(searchQuery))
             {
                 LoadRecipes();
             }
             else
             {
-                // Выполните поиск рецептов по названию, используя searchQuery
+                
                 List<Recipes> searchResults = GetRecipes().Where(r => r.recipename.IndexOf(searchQuery, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
 
-                // Обновите свойство Recipes, чтобы отобразить результаты поиска
+    
                 Recipes.Clear();
                 foreach (var recipe in searchResults)
                 {

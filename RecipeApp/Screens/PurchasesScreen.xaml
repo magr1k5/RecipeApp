@@ -3,11 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RecipeApp.Screens.PurchasesScreen"
              xmlns:viewModel="clr-namespace:RecipeApp.ViewModel"
-             Title="PurchasesScreen">
+             xmlns:controls="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
+             Title="Покупки">
 
     <ContentPage.BindingContext>
         <viewModel:RecipesAfterChooseViewModel />
     </ContentPage.BindingContext>
+
+    <Shell.SearchHandler>
+        <controls:SearchHandler
+Placeholder="Поиск..."
+Query="{Binding SearchQuery}"
+ShowsResults="True"
+ItemsSource="{Binding Recipes}"
+Command="{Binding SearchCommand}" />
+    </Shell.SearchHandler>
 
     <ScrollView>
         <StackLayout>

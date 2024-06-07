@@ -14,7 +14,9 @@ namespace RecipeApp.ViewModel
 
         public UsersRecipesViewModel()
         {
-            dbManager = new DatabaseManager("User Id=postgres;Host=localhost;Database=recipe_app_db;Port=5432;password=root;");
+            var localhost = "localhost";
+            var android_local = "10.0.2.2";
+            dbManager = new DatabaseManager($"User Id=postgres;Host={android_local};Database=recipe_app_db;Port=5432;password=root;");
             LoadUserRecipes();
             NavigateToRecipeDetailsCommand = new Command<Recipes>(NavigateToRecipeDetails);
 

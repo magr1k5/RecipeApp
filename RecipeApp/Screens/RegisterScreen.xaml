@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RecipeApp.Screens.RegisterScreen"
-             Title="RegisterScreen">
+             Title="Регистрация">
     <VerticalStackLayout>
         <Label 
             Text="Зарегистрируйтесь в приложении!"
@@ -11,15 +11,15 @@
 
         <Entry 
             x:Name="FullNameEntry"
-            Placeholder="Enter your full name" />
+            Placeholder="Введите ваше имя и фамилию" />
 
         <Entry 
             x:Name="NicknameEntry"
-            Placeholder="Enter your nickname" />
+            Placeholder="Введите ваш никнейм" />
 
         <Entry 
             x:Name="PasswordEntry"
-            Placeholder="Create a password"
+            Placeholder="Придумайте пароль"
             IsPassword="true" />
 
         <Button 

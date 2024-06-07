@@ -17,5 +17,8 @@ namespace RecipeApp.Classes
         public string img { get; set; }
 
         public bool pending { get; set; }
+
+        public string CreatorName { get; set; } // Для отображения имени создателя
+
     }
 }

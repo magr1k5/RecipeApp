@@ -40,7 +40,7 @@ namespace RecipeApp.Screens
             password = Hashing.toSHA256(password);
             var localhost = "localhost";
             var android_local = "10.0.2.2";
-            string connectionString = $"User Id=postgres;Host={localhost};Database=recipe_app_db;Port=5432;password=root"; // 192.168.0.101
+            string connectionString = $"User Id=postgres;Host={android_local};Database=recipe_app_db;Port=5432;password=root"; 
             using (DatabaseManager dbManager = new DatabaseManager(connectionString))
             {
                 dbManager.OpenConnection();

@@ -18,8 +18,10 @@ namespace RecipeApp.ViewModel
         {
             Ingredients = new ObservableCollection<Ingredient>();
             Steps = new ObservableCollection<RecipesSteps>();
-            _dbManager = new DatabaseManager($"User Id=postgres;Host=localhost;Database=recipe_app_db;Port=5432;password=root");
-            currentUser = App.CurrentUser; // Предположим, что текущий пользователь хранится в App.CurrentUser
+            var localhost = "localhost";
+            var android_local = "10.0.2.2";
+            _dbManager = new DatabaseManager($"User Id=postgres;Host={android_local};Database=recipe_app_db;Port=5432;password=root;");
+            currentUser = App.CurrentUser; 
             AddToFavoritesCommand = new Command(async () => await AddToFavoriteAsync());
 
         }
