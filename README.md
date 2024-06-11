@@ -1,4 +1,4 @@
-Видеоролик с демонстрацией приложения и всех основных его функций: https://www.youtube.com/watch?v=ij4sQ0jRDVw
+Видеоролик с демонстрацией приложения и всех основных его функций: [https://www.youtube.com/watch?v=ij4sQ0jRDVw](https://www.youtube.com/watch?v=kCYPtx5SdgA)
 
 Видеоролик с инструкцией по установке рабочей обалсти и проекта: https://www.youtube.com/watch?v=M0oV8apSkCg
 
